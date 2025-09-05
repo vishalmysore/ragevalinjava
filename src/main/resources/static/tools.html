@@ -1,0 +1,1324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic RAG Tools & Services</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --success-color: #059669;
+            --danger-color: #dc2626;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+            --card-border: rgba(0, 0, 0, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, #3b82f6, #1e40af);
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .header-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 107%, #3b82f6 0%, #1e40af 90%);
+            opacity: 0.8;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .tool-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: 1px solid var(--card-border);
+        }
+
+        .tool-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tool-title {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .tool-description {
+            color: var(--text-color);
+            margin-bottom: 1.5rem;
+        }
+
+        .feature-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .feature-list li {
+            margin-bottom: 0.5rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        .feature-list li::before {
+            content: "→";
+            position: absolute;
+            left: 0;
+            color: var(--primary-color);
+        }
+
+        .code-preview {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .nav-bar {
+            background: white;
+            padding: 1rem 0;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .nav-links a {
+            color: var(--text-color);
+            text-decoration: none;
+            margin-left: 2rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .tool-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .nav-container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .nav-links {
+                margin-top: 1rem;
+            }
+
+            .nav-links a {
+                margin: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h2>Agentic RAG</h2>
+            </div>
+            <div class="nav-links">
+                <a href="index.html">Home</a>
+                <a href="tools.html">Tools</a>
+            </div>
+        </div>
+    </nav>
+
+    <header>
+        <div class="header-bg"></div>
+        <div class="header-content">
+            <h1>Agentic RAG Tools & Services</h1>
+            <p class="subtitle">A comprehensive suite of smart appliance manual management tools built with A2AJava</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="tool-grid">
+            <div class="tool-card">
+                <div class="tool-icon">🧺</div>
+                <h3 class="tool-title">WashingMachineManual</h3>
+                <p class="tool-description">Manages washing machine instructions and documentation with smart retrieval capabilities.</p>
+                <ul class="feature-list">
+                    <li>Store machine-specific instructions</li>
+                    <li>Smart content length management</li>
+                    <li>Model-based retrieval</li>
+                    <li>Automatic logging</li>
+                </ul>
+                <div class="code-preview">
+@Action(description = "Store instructions")
+public String storeInstructions(
+    String instructions, 
+    String modelNumber
+) { ... }</div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🧹</div>
+                <h3 class="tool-title">VacuumCleanerManual</h3>
+                <p class="tool-description">Specialized service for vacuum cleaner documentation with vector-based search.</p>
+                <ul class="feature-list">
+                    <li>Model-specific instructions</li>
+                    <li>Efficient data storage</li>
+                    <li>Quick retrieval system</li>
+                    <li>Content validation</li>
+                </ul>
+                <div class="code-preview">
+@Action(description = "Retrieve instructions")
+public String retrieveInstructions(
+    String modelNumber
+) { ... }</div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🍽️</div>
+                <h3 class="tool-title">DishwasherManual</h3>
+                <p class="tool-description">Comprehensive dishwasher instruction management with semantic search capabilities.</p>
+                <ul class="feature-list">
+                    <li>Detailed instruction storage</li>
+                    <li>Vector-based retrieval</li>
+                    <li>Input validation</li>
+                    <li>Performance optimization</li>
+                </ul>
+                <div class="code-preview">
+@Agent(groupName = "dishwasher")
+public class DishwasherManual { ... }</div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🌡️</div>
+                <h3 class="tool-title">AirConditionerManual</h3>
+                <p class="tool-description">Smart AC manual management system with efficient storage and retrieval.</p>
+                <ul class="feature-list">
+                    <li>Installation guides</li>
+                    <li>Operation instructions</li>
+                    <li>Maintenance tips</li>
+                    <li>Troubleshooting guides</li>
+                </ul>
+                <div class="code-preview">
+@Action(description = "Store AC manual")
+public String storeInstructions(...) { ... }</div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">❄️</div>
+                <h3 class="tool-title">RefrigeratorManual</h3>
+                <p class="tool-description">Intelligent refrigerator documentation system with semantic search.</p>
+                <ul class="feature-list">
+                    <li>Temperature settings</li>
+                    <li>Maintenance schedules</li>
+                    <li>Storage guidelines</li>
+                    <li>Energy saving tips</li>
+                </ul>
+                <div class="code-preview">
+@Agent(groupName = "refrigerator")
+public class RefrigeratorManual { ... }</div>
+            </div>
+
+            <div class="tool-card">
+                <div class="tool-icon">🔥</div>
+                <h3 class="tool-title">MicrowaveManual</h3>
+                <p class="tool-description">Comprehensive microwave operation and safety instruction management.</p>
+                <ul class="feature-list">
+                    <li>Safety guidelines</li>
+                    <li>Operation instructions</li>
+                    <li>Power settings guide</li>
+                    <li>Maintenance tips</li>
+                </ul>
+                <div class="code-preview">
+@Action(description = "Get safety info")
+public String getInstructions(...) { ... }</div>
+            </div>
+        </div>
+
+        <section style="margin-top: 4rem; text-align: center;">
+            <h2 style="color: var(--primary-color); margin-bottom: 1rem;">Common Features Across All Tools</h2>
+            <div class="tool-grid" style="grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));">
+                <div class="tool-card">
+                    <h4>Vector Storage</h4>
+                    <p>Efficient document storage using MongoDB vector store</p>
+                </div>
+                <div class="tool-card">
+                    <h4>Smart Retrieval</h4>
+                    <p>Semantic search capabilities for accurate results</p>
+                </div>
+                <div class="tool-card">
+                    <h4>Content Validation</h4>
+                    <p>Automatic content length and format validation</p>
+                </div>
+                <div class="tool-card">
+                    <h4>Logging</h4>
+                    <p>Comprehensive activity logging for debugging</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+Curl Commands to test
+
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForRefrigerator",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the operating instructions for the refrigerator model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:02 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForRefrigerator:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the operating instructions for the refrigerator model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:04 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForRefrigerator:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForRefrigerator",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for storing items in the refrigerator (not exceeding 10 lines) and the model number of the refrigerator. For example: Store perishable items on the top shelf, keep dairy products in their designated compartment, and ensure the door is closed tightly. Model Number: RF1234XYZ."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:04 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForRefrigerator:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for storing items in the refrigerator (not exceeding 10 lines) and the model number of the refrigerator. For example: Store perishable items on the top shelf, keep dairy products in their designated compartment, and ensure the door is closed tightly. Model Number: RF1234XYZ.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:05 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for retrieveInstructionsForWashingMachine:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForWashingMachine",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the washing machine instructions for model number WM1234."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:05 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForWashingMachine:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the washing machine instructions for model number WM1234.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:09 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForWashingMachine:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForWashingMachine",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for washing machine model WM1234: 1. Sort laundry by color. 2. Check pockets for items. 3. Use the appropriate cycle for fabric type. 4. Add detergent as per the instructions. 5. Close the door securely. 6. Select the desired temperature. 7. Start the machine. 8. Wait for the cycle to complete. 9. Remove laundry promptly. 10. Clean the lint filter after each use."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:09 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForWashingMachine:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for washing machine model WM1234: 1. Sort laundry by color. 2. Check pockets for items. 3. Use the appropriate cycle for fabric type. 4. Add detergent as per the instructions. 5. Close the door securely. 6. Select the desired temperature. 7. Start the machine. 8. Wait for the cycle to complete. 9. Remove laundry promptly. 10. Clean the lint filter after each use.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:11 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for retrieveInstructionsForVacuumCleaner:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForVacuumCleaner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the vacuum cleaner model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:11 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForVacuumCleaner:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the vacuum cleaner model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:15 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForVacuumCleaner:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForVacuumCleaner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the vacuum cleaner model number VC123: 1. Plug in the vacuum cleaner. 2. Turn on the power switch. 3. Adjust the height setting according to the floor type. 4. Move the vacuum cleaner slowly across the floor. 5. Empty the dustbin when full. 6. Clean the filter regularly. 7. Store the vacuum cleaner in a dry place. 8. Do not vacuum wet surfaces. 9. For best results, vacuum once a week. 10. Refer to the manual for troubleshooting."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:15 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForVacuumCleaner:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the vacuum cleaner model number VC123: 1. Plug in the vacuum cleaner. 2. Turn on the power switch. 3. Adjust the height setting according to the floor type. 4. Move the vacuum cleaner slowly across the floor. 5. Empty the dustbin when full. 6. Clean the filter regularly. 7. Store the vacuum cleaner in a dry place. 8. Do not vacuum wet surfaces. 9. For best results, vacuum once a week. 10. Refer to the manual for troubleshooting.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:17 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for retrieveInstructionsForAirConditioner:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForAirConditioner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the air conditioner model number ABC123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:17 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForAirConditioner:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the air conditioner model number ABC123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:21 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForAirConditioner:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForAirConditioner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the air conditioner model AC1234:
+    1. Plug in the unit to a power source.
+    2. Use the remote control to power on the air conditioner.
+    3. Set the desired temperature using the + and – buttons.
+    4. Select the mode (Cool, Fan, or Heat) using the mode button.
+    5. Adjust the fan speed as needed.
+    6. Clean the air filter every month for optimal performance.
+    7. Ensure windows and doors are closed while in use.
+    8. Turn off the unit when not in use to save energy.
+    9. If the unit does not cool, check for obstructions.
+    10. For maintenance, contact a professional service provider.
+    "
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:21 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForAirConditioner:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the air conditioner model AC1234:
+    1. Plug in the unit to a power source.
+    2. Use the remote control to power on the air conditioner.
+    3. Set the desired temperature using the + and – buttons.
+    4. Select the mode (Cool, Fan, or Heat) using the mode button.
+    5. Adjust the fan speed as needed.
+    6. Clean the air filter every month for optimal performance.
+    7. Ensure windows and doors are closed while in use.
+    8. Turn off the unit when not in use to save energy.
+    9. If the unit does not cool, check for obstructions.
+    10. For maintenance, contact a professional service provider.
+    ",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:25 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForDishwasher:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForDishwasher",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the dishwasher model DW1234:
+    1. Ensure all items are dishwasher safe.
+    2. Load the bottom rack with larger items and the top rack with smaller ones.
+    3. Avoid overcrowding the dishwasher to ensure proper cleaning.
+    4. Use the appropriate amount of detergent as per the manufacturers instructions.
+    5. Select the desired wash cycle based on the load type.
+    6. Check for any blockages in the spray arms before starting.
+    7. Close the door securely before starting the machine.
+    8. Wait for the cycle to complete before unloading.
+    9. Clean the filter regularly for optimal performance.
+    10. Refer to the user manual for any troubleshooting tips."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:25 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForDishwasher:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the dishwasher model DW1234:
+    1. Ensure all items are dishwasher safe.
+    2. Load the bottom rack with larger items and the top rack with smaller ones.
+    3. Avoid overcrowding the dishwasher to ensure proper cleaning.
+    4. Use the appropriate amount of detergent as per the manufacturers instructions.
+    5. Select the desired wash cycle based on the load type.
+    6. Check for any blockages in the spray arms before starting.
+    7. Close the door securely before starting the machine.
+    8. Wait for the cycle to complete before unloading.
+    9. Clean the filter regularly for optimal performance.
+    10. Refer to the user manual for any troubleshooting tips.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:26 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for retrieveInstructionsForDishwasher:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForDishwasher",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the dishwasher model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:26 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForDishwasher:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the dishwasher model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:30 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for storeInstructionsForMicrowave:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForMicrowave",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the microwave model number ABC123: 1. Place food in the microwave-safe container. 2. Close the door securely. 3. Select the power level. 4. Set the cooking time. 5. Press the start button. 6. Stir the food halfway through cooking. 7. Allow the food to stand for 1 minute after cooking. 8. Use oven mitts to remove the container. 9. Enjoy your meal! 10. Clean the microwave after use."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:30 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for storeInstructionsForMicrowave:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the microwave model number ABC123: 1. Place food in the microwave-safe container. 2. Close the door securely. 3. Select the power level. 4. Set the cooking time. 5. Press the start button. 6. Stir the food halfway through cooking. 7. Allow the food to stand for 1 minute after cooking. 8. Use oven mitts to remove the container. 9. Enjoy your meal! 10. Clean the microwave after use.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:32 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: MCP Curl Command for retrieveInstructionsForMicrowave:
+    curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForMicrowave",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the microwave model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    Jun 14, 2025 4:19:32 P.M. io.github.vishalmysore.debug.DebugCurlCommands getCurlCommands
+    INFO: A2A Curl Command for retrieveInstructionsForMicrowave:
+    curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the microwave model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    Generated curl commands:
+    A2A_storeInstructionsForVacuumCleaner: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the vacuum cleaner model number VC123: 1. Plug in the vacuum cleaner. 2. Turn on the power switch. 3. Adjust the height setting according to the floor type. 4. Move the vacuum cleaner slowly across the floor. 5. Empty the dustbin when full. 6. Clean the filter regularly. 7. Store the vacuum cleaner in a dry place. 8. Do not vacuum wet surfaces. 9. For best results, vacuum once a week. 10. Refer to the manual for troubleshooting.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    tool-list: curl -H "Content-Type: application/json" -d '{"jsonrpc":"2.0","method":"tools/list","params":{},"id":9}' http://localhost:7860
+    MCP_retrieveInstructionsForWashingMachine: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForWashingMachine",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the washing machine instructions for model number WM1234."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_storeInstructionsForDishwasher: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the dishwasher model DW1234:
+    1. Ensure all items are dishwasher safe.
+    2. Load the bottom rack with larger items and the top rack with smaller ones.
+    3. Avoid overcrowding the dishwasher to ensure proper cleaning.
+    4. Use the appropriate amount of detergent as per the manufacturers instructions.
+    5. Select the desired wash cycle based on the load type.
+    6. Check for any blockages in the spray arms before starting.
+    7. Close the door securely before starting the machine.
+    8. Wait for the cycle to complete before unloading.
+    9. Clean the filter regularly for optimal performance.
+    10. Refer to the user manual for any troubleshooting tips.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    A2A_storeInstructionsForAirConditioner: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the air conditioner model AC1234:
+    1. Plug in the unit to a power source.
+    2. Use the remote control to power on the air conditioner.
+    3. Set the desired temperature using the + and – buttons.
+    4. Select the mode (Cool, Fan, or Heat) using the mode button.
+    5. Adjust the fan speed as needed.
+    6. Clean the air filter every month for optimal performance.
+    7. Ensure windows and doors are closed while in use.
+    8. Turn off the unit when not in use to save energy.
+    9. If the unit does not cool, check for obstructions.
+    10. For maintenance, contact a professional service provider.
+    ",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForAirConditioner: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the air conditioner model number ABC123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForMicrowave: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the microwave model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    agent-Card: curl http://localhost:7860/.well-known/agent.json
+    MCP_retrieveInstructionsForAirConditioner: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForAirConditioner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the air conditioner model number ABC123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    MCP_retrieveInstructionsForMicrowave: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForMicrowave",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the microwave model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForRefrigerator: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the operating instructions for the refrigerator model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    MCP_storeInstructionsForRefrigerator: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForRefrigerator",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for storing items in the refrigerator (not exceeding 10 lines) and the model number of the refrigerator. For example: Store perishable items on the top shelf, keep dairy products in their designated compartment, and ensure the door is closed tightly. Model Number: RF1234XYZ."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_storeInstructionsForWashingMachine: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for washing machine model WM1234: 1. Sort laundry by color. 2. Check pockets for items. 3. Use the appropriate cycle for fabric type. 4. Add detergent as per the instructions. 5. Close the door securely. 6. Select the desired temperature. 7. Start the machine. 8. Wait for the cycle to complete. 9. Remove laundry promptly. 10. Clean the lint filter after each use.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    A2A_storeInstructionsForMicrowave: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please store the following instructions for the microwave model number ABC123: 1. Place food in the microwave-safe container. 2. Close the door securely. 3. Select the power level. 4. Set the cooking time. 5. Press the start button. 6. Stir the food halfway through cooking. 7. Allow the food to stand for 1 minute after cooking. 8. Use oven mitts to remove the container. 9. Enjoy your meal! 10. Clean the microwave after use.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    MCP_retrieveInstructionsForDishwasher: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForDishwasher",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the dishwasher model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    MCP_retrieveInstructionsForVacuumCleaner: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForVacuumCleaner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the instructions for the vacuum cleaner model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    MCP_retrieveInstructionsForRefrigerator: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "retrieveInstructionsForRefrigerator",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please provide the operating instructions for the refrigerator model number XYZ123."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    MCP_storeInstructionsForVacuumCleaner: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForVacuumCleaner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the vacuum cleaner model number VC123: 1. Plug in the vacuum cleaner. 2. Turn on the power switch. 3. Adjust the height setting according to the floor type. 4. Move the vacuum cleaner slowly across the floor. 5. Empty the dustbin when full. 6. Clean the filter regularly. 7. Store the vacuum cleaner in a dry place. 8. Do not vacuum wet surfaces. 9. For best results, vacuum once a week. 10. Refer to the manual for troubleshooting."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForWashingMachine: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the washing machine instructions for model number WM1234.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    MCP_storeInstructionsForWashingMachine: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForWashingMachine",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for washing machine model WM1234: 1. Sort laundry by color. 2. Check pockets for items. 3. Use the appropriate cycle for fabric type. 4. Add detergent as per the instructions. 5. Close the door securely. 6. Select the desired temperature. 7. Start the machine. 8. Wait for the cycle to complete. 9. Remove laundry promptly. 10. Clean the lint filter after each use."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    MCP_storeInstructionsForDishwasher: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForDishwasher",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the dishwasher model DW1234:
+    1. Ensure all items are dishwasher safe.
+    2. Load the bottom rack with larger items and the top rack with smaller ones.
+    3. Avoid overcrowding the dishwasher to ensure proper cleaning.
+    4. Use the appropriate amount of detergent as per the manufacturers instructions.
+    5. Select the desired wash cycle based on the load type.
+    6. Check for any blockages in the spray arms before starting.
+    7. Close the door securely before starting the machine.
+    8. Wait for the cycle to complete before unloading.
+    9. Clean the filter regularly for optimal performance.
+    10. Refer to the user manual for any troubleshooting tips."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_storeInstructionsForRefrigerator: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for storing items in the refrigerator (not exceeding 10 lines) and the model number of the refrigerator. For example: Store perishable items on the top shelf, keep dairy products in their designated compartment, and ensure the door is closed tightly. Model Number: RF1234XYZ.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    MCP_storeInstructionsForAirConditioner: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForAirConditioner",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the air conditioner model AC1234:
+    1. Plug in the unit to a power source.
+    2. Use the remote control to power on the air conditioner.
+    3. Set the desired temperature using the + and – buttons.
+    4. Select the mode (Cool, Fan, or Heat) using the mode button.
+    5. Adjust the fan speed as needed.
+    6. Clean the air filter every month for optimal performance.
+    7. Ensure windows and doors are closed while in use.
+    8. Turn off the unit when not in use to save energy.
+    9. If the unit does not cool, check for obstructions.
+    10. For maintenance, contact a professional service provider.
+    "
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForVacuumCleaner: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the vacuum cleaner model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    A2A_retrieveInstructionsForDishwasher: curl -v \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tasks/send",
+    "params": {
+    "id": "999789",
+    "sessionId": "sdf44555",
+    "message": {
+    "role": "user",
+    "parts": [
+    {
+    "type": "text",
+    "text": "Please provide the instructions for the dishwasher model number XYZ123.",
+    "metadata": null
+    }
+    ]
+    }
+    }
+    }' http://localhost:7860
+    MCP_storeInstructionsForMicrowave: curl  \
+    -H "Content-Type: application/json" \
+    -d '{
+    "jsonrpc": "2.0",
+    "method": "tools/call",
+    "params": {
+    "name": "storeInstructionsForMicrowave",
+    "arguments": {
+    "provideAllValuesInPlainEnglish": {
+    "value": "Please store the following instructions for the microwave model number ABC123: 1. Place food in the microwave-safe container. 2. Close the door securely. 3. Select the power level. 4. Set the cooking time. 5. Press the start button. 6. Stir the food halfway through cooking. 7. Allow the food to stand for 1 minute after cooking. 8. Use oven mitts to remove the container. 9. Enjoy your meal! 10. Clean the microwave after use."
+    }
+    }
+    },
+    "id": 25
+    }' http://localhost:7860
+
+</body>
+</html>

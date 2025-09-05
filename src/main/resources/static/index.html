@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentic RAG Patterns Implementation</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1e40af;
+            --bg-color: #f8fafc;
+            --text-color: #1e293b;
+            --code-bg: #1e1e1e;
+            --code-text: #d4d4d4;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-color);
+            background: var(--bg-color);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            padding: 4rem 0;
+            margin-bottom: 3rem;
+        }
+
+        .header-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            font-weight: 700;
+        }
+
+        .hero-text {
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        .section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+        }
+
+        h2 {
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+
+        h3 {
+            color: var(--secondary-color);
+            margin: 1.5rem 0 1rem;
+            font-size: 1.4rem;
+        }
+
+        ul, ol {
+            margin-left: 2rem;
+            margin-bottom: 1.5rem;
+        }
+
+        li {
+            margin-bottom: 0.5rem;
+        }
+
+        pre {
+            background: var(--code-bg);
+            color: var(--code-text);
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        code {
+            font-family: 'Monaco', 'Consolas', monospace;
+            font-size: 0.9rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid rgba(0, 0, 0, 0.1);
+        }
+
+        .agent-example {
+            border-left: 4px solid var(--primary-color);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+        }
+
+        .emoji-icon {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 1rem;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <h1>Agentic RAG Patterns Implementation</h1>
+            <p class="hero-text">A working reference implementation using A2AJava framework for structured, deterministic agents</p>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>Overview</h2>
+            <p>This implementation demonstrates Agentic Retrieval-Augmented Generation (Agentic RAG) using A2AJava, a structured Java agent framework. It follows design patterns that improve reliability, performance, and structure of retrieval workflows.</p>
+        </section>
+
+        <section class="section">
+            <h2>What the Paper Proposes</h2>
+            <p>The Agentic RAG paper introduces a more structured and selective approach to information retrieval and reasoning. Unlike traditional RAG systems, Agentic RAG systems use intelligent agents to:</p>
+            <ul>
+                <li>Decide whether a query needs retrieval at all</li>
+                <li>Choose which tools or actions to invoke</li>
+                <li>Execute deterministic steps when possible</li>
+                <li>Use LLMs or retrieval fallback only when necessary</li>
+            </ul>
+
+            <h3>Key Patterns</h3>
+            <ul>
+                <li>Agentic Routing</li>
+                <li>Tool Use</li>
+                <li>Reflection</li>
+                <li>Planning</li>
+                <li>Multi-Agent Workflows</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>What is A2AJava?</h2>
+            <p>A2AJava is a Java framework for defining and invoking structured, deterministic agents. It is built on the Action-to-Action (A2A) protocol, enabling agents to declare actions, exchange JSON-compatible inputs and outputs, and collaborate using semantic memory and retrieval.</p>
+
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <h3>Multi-Language Support</h3>
+                    <p>Build agents in Java, Kotlin, Groovy, and Scala</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Annotations</h3>
+                    <p>Use @Action, @Agent, and @Prompt annotations</p>
+                </div>
+                <div class="feature-card">
+                    <h3>Vector Integration</h3>
+                    <p>Built-in support for vector databases</p>
+                </div>
+                <div class="feature-card">
+                    <h3>LLM Fallback</h3>
+                    <p>Optional LLM/RAG fallback for open-ended inputs</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Agent Examples</h2>
+
+            <div class="agent-example">
+                <div class="emoji-icon">🧺</div>
+                <h3>WashingMachineManual Agent</h3>
+                <p>Handles storage and retrieval of washing machine instructions</p>
+                <pre><code>@Agent(groupName = "washing machine")
+public class WashingMachineManual {
+    @Action(description = "Store instructions")
+    public String storeInstructions(...) {
+        // Implementation
+    }
+}</code></pre>
+            </div>
+
+            <div class="agent-example">
+                <div class="emoji-icon">🧹</div>
+                <h3>VacuumCleanerManual Agent</h3>
+                <p>Manages vacuum cleaner documentation and instructions</p>
+                <pre><code>@Agent(groupName = "vacuum cleaner")
+public class VacuumCleanerManual {
+    @Action(description = "Retrieve instructions")
+    public String retrieveInstructions(...) {
+        // Implementation
+    }
+}</code></pre>
+            </div>
+
+            <div class="agent-example">
+                <div class="emoji-icon">⚖️</div>
+                <h3>LegalAgent</h3>
+                <p>Provides legal analysis tools and compliance checking</p>
+                <pre><code>@Agent(groupName = "legal agent")
+public class LegalAgent {
+    @Action(description = "Check compliance")
+    public String checkCompliance(...) {
+        // Implementation
+    }
+}</code></pre>
+            </div>
+
+            <div class="agent-example">
+                <div class="emoji-icon">🍳</div>
+                <h3>RecipeAgent</h3>
+                <p>Stores and retrieves cooking instructions and recipes</p>
+                <pre><code>@Agent(groupName = "recipes")
+public class RecipeAgent {
+    @Action(description = "Store recipe")
+    public String storeRecipe(...) {
+        // Implementation
+    }
+}</code></pre>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>License</h2>
+            <p>This project is licensed under the MIT License - see the LICENSE file for details.</p>
+        </section>
+    </div>
+</body>
+</html>
