@@ -4,7 +4,7 @@
 
 When building Retrieval-Augmented Generation (RAG) systems, it’s crucial to evaluate both the retrieval quality and the generation quality of your LLM-based applications. Here’s a cheat sheet of key metrics to consider at different stages of your RAG pipeline.
 
-We want to measure Precision, Recall, F1, MRR, nDCG, and Hit@k for your RAG implementation using Spring AI + VectorStore in our A2ARagService. Look at [a2ajava](https://github.com/vishalmysore/a2ajava) to see how to build a2a clients and agents.
+We want to measure Precision, Recall, F1, MRR, nDCG, and Hit@k for your RAG implementation using Spring AI + VectorStore in our AgenticRagService. Look at [a2ajava](https://github.com/vishalmysore/a2ajava) to see how to build a2a clients and agents.
 
 | **Metric**                                         | **What It Measures**                                      | **Formula / Intuition**                                            | **When to Use**                     |
 | -------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------- |
@@ -18,15 +18,15 @@ We want to measure Precision, Recall, F1, MRR, nDCG, and Hit@k for your RAG impl
 Example:
 If you have 10 ground-truth docs and your LLM retrieves 6 relevant docs:
 
-Precision = 6 / 10 = 60%
+**Precision** = 6 / 10 = 60%
 
-Recall = 6 / 10 = 60%
+**Recall** = 6 / 10 = 60%
 
 If the first relevant doc is at position 2 → MRR = 1/2 = 0.5
 
 Generation-Level Metrics (LLM Answer Quality)
 
-Once documents are retrieved, you need to check if the LLM-generated answer is correct, factual, and
+Once documents are retrieved, we need to check if the LLM-generated answer is correct, factual, and high-quality. Here are key metrics for evaluating LLM outputs:
 
 
 | **Metric**                        | **What It Measures**                                       | **How It's Evaluated**                      | **Use Case**                    |
@@ -40,9 +40,9 @@ Once documents are retrieved, you need to check if the LLM-generated answer is c
 | **Hallucination Rate** ❌          | % of responses **not supported** by retrieved docs         | Count hallucinations manually or with GPT-4 | Mission-critical AI             |
 
 
-Conversational & Agentic Metrics (Multi-Agent + Multi-Turn)
+### Conversational & Agentic Metrics (Multi-Agent + Multi-Turn)
 
-When you’re working with agents, MCP, A2A, or microservices-based LLMs, extra metrics come into play:
+When we are working with agents, MCP, A2A, or microservices-based LLMs, extra metrics come into play:
 
 | **Metric**                       | **What It Measures**                          | **Example**                            |
 | -------------------------------- | --------------------------------------------- | -------------------------------------- |
@@ -56,7 +56,7 @@ When you’re working with agents, MCP, A2A, or microservices-based LLMs, extra 
 
 ## Business-Level & User-Centric Metrics
 
-For production RAG or GenAI apps, you also need practical KPIs:
+For production RAG or GenAI apps, we also need practical KPIs:
 
 | **Metric**                     | **Meaning**                           | **Why It Matters**     |
 | ------------------------------ | ------------------------------------- | ---------------------- |
