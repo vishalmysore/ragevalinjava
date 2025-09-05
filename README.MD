@@ -4,7 +4,7 @@
 
 When building Retrieval-Augmented Generation (RAG) systems, it’s crucial to evaluate both the retrieval quality and the generation quality of your LLM-based applications. Here’s a cheat sheet of key metrics to consider at different stages of your RAG pipeline.
 
-We want to measure Precision, Recall, F1, MRR, nDCG, and Hit@k for your RAG implementation using Spring AI + VectorStore in your A2ARagService
+We want to measure Precision, Recall, F1, MRR, nDCG, and Hit@k for your RAG implementation using Spring AI + VectorStore in our A2ARagService. Look at [a2ajava](https://github.com/vishalmysore/a2ajava) to see how to build a2a clients and agents.
 
 | **Metric**                                         | **What It Measures**                                      | **Formula / Intuition**                                            | **When to Use**                     |
 | -------------------------------------------------- | --------------------------------------------------------- | ------------------------------------------------------------------ | ----------------------------------- |
