@@ -54,7 +54,7 @@ When you’re working with agents, MCP, A2A, or microservices-based LLMs, extra 
 | **Recovery Rate**                | How often the agent **recovers from failure** | Crucial for multi-repo workflows       |
 
 
-Business-Level & User-Centric Metrics
+## Business-Level & User-Centric Metrics
 
 For production RAG or GenAI apps, you also need practical KPIs:
 
@@ -69,10 +69,10 @@ For production RAG or GenAI apps, you also need practical KPIs:
 
 ### Putting It Together — LLM Evaluation Pyramid
 
-Level 1 → Retrieval Metrics → Is the right info fetched? (Precision, Recall, MRR)
-Level 2 → Generation Metrics → Does the LLM give a correct answer? (ROUGE, Faithfulness, Hallucination)
-Level 3 → Agentic Metrics → Can the LLM complete multi-step tasks? (Tool Accuracy, Task Success Rate)
-Level 4 → Business Metrics → Does the solution actually work for users? (CSAT, Cost, Latency)
+Level 1 → Retrieval Metrics → Is the right info fetched? (Precision, Recall, MRR)  
+Level 2 → Generation Metrics → Does the LLM give a correct answer? (ROUGE, Faithfulness, Hallucination)  
+Level 3 → Agentic Metrics → Can the LLM complete multi-step tasks? (Tool Accuracy, Task Success Rate)  
+Level 4 → Business Metrics → Does the solution actually work for users? (CSAT, Cost, Latency)  
 
 ### For this evaluation
 
@@ -114,3 +114,6 @@ Distractors & irrelevant docs ✅
 Multi-turn retrieval ✅
 
 Ranking quality ✅
+
+## Screenshots
+![Rag](swagger.jpg) 
