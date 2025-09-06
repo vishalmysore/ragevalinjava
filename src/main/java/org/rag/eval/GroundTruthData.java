@@ -6,7 +6,7 @@ import java.util.List;
 
 public class GroundTruthData {
 
-    public static final List<String> GROUND_TRUTH_DOCS = List.of(
+    public static  List<String> GROUND_TRUTH_DOCS = List.of(
 
             // ---------------------- APPLIANCES (20) ----------------------
             "Refrigerator RF1234XYZ: Store perishable items on top shelf, keep dairy in compartments, place meat at bottom, seal leftovers, separate fruits and vegetables.",
