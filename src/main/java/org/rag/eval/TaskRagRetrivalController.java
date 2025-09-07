@@ -33,6 +33,6 @@ public class TaskRagRetrivalController {
             documentText = documentText.substring(0,200); // trim to avoid overloading free mongo instance
             vectorService.storeData(documentText);
             GroundTruthData.GROUND_TRUTH_DOCS.add(documentText);
-            return "Document stored successfully";
+            return "Document stored successfully 200 chars "+ documentText;
         }
 }

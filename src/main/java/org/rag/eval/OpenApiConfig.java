@@ -12,8 +12,8 @@ public class OpenApiConfig {
     public OpenAPI customOpenAPI() {
         return new OpenAPI()
                 .info(new Info()
-                        .title("CookGPT")
-                        .description("Eat Yummy Yummy Food, because Food is Love")
+                        .title("Rag Eval Service API")
+                        .description("Validation of RAG service with multiple agents")
                         .version("v1.0"));
     }
 }
