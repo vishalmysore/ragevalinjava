@@ -20,19 +20,32 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
     </properties>
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.ai</groupId>
+                <artifactId>spring-ai-bom</artifactId>
+                <version>1.0.0-M6</version> <!-- Use the latest Milestone/Release candidate -->
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
     <dependencies>
+
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-mongodb-atlas-store-spring-boot-starter</artifactId>
-            <version>1.0.0-M6</version>
+
         </dependency>
         <!-- https://mvnrepository.com/artifact/group.springframework.ai/spring-ai-openai-spring-boot-starter -->
         <!-- https://mvnrepository.com/artifact/org.springframework.ai/spring-ai-openai-spring-boot-starter -->
         <dependency>
             <groupId>org.springframework.ai</groupId>
             <artifactId>spring-ai-openai-spring-boot-starter</artifactId>
-            <version>1.0.0-M6</version>
+
         </dependency>
+
         <dependency>
             <groupId>org.springdoc</groupId>
             <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>

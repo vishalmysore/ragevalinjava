@@ -30,9 +30,34 @@ public class TaskRagRetrivalController {
 
         @PostMapping("/storeDocument")
         public String storeDocument(@RequestParam("documentText") String documentText)  {
-            documentText = documentText.substring(0,200); // trim to avoid overloading free mongo instance
+            documentText = documentText.substring(0, Math.min(documentText.length(), 200)); // Trim to first 200 chars
             vectorService.storeData(documentText);
             GroundTruthData.GROUND_TRUTH_DOCS.add(documentText);
             return "Document stored successfully 200 chars "+ documentText;
+        }
+
+
+    @GetMapping("/optimizedDocuments")
+    public List<Document> optimizedDocs(@RequestParam("documentText") String documentText) {
+     //   String optimizedQuery = llmService.rewriteQuery(documentText);
+        return vectorService.getSimilarDocuments(documentText);
+    }
+
+    @GetMapping("/rerankedDocs")
+    public List<Document> rerankedDocs(@RequestParam("documentText") String documentText) {
+        List<Document> retrievedDocs = vectorService.getSimilarDocuments(documentText);
+      //  return embeddingService.rerankByEmbedding(retrievedDocs, documentText);
+        return retrievedDocs; // placeholder until reranking is implemented
+    }
+
+
+
+
+
+
+
+    @GetMapping("/groundTruth")
+        public List<String> groundTruth()  {
+            return GroundTruthData.GROUND_TRUTH_DOCS;
         }
 }
