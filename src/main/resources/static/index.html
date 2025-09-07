@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Agentic RAG Patterns Implementation</title>
+    <title>RAG Evaluation in Java</title>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap">
     <style>
         :root {
             --primary-color: #2563eb;
             --secondary-color: #1e40af;
+            --success-color: #059669;
             --bg-color: #f8fafc;
             --text-color: #1e293b;
             --code-bg: #1e1e1e;
@@ -56,6 +57,22 @@
         .hero-text {
             font-size: 1.2rem;
             opacity: 0.9;
+            margin-bottom: 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--success-color);
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background-color 0.3s ease;
+        }
+
+        .cta-button:hover {
+            background: #047857;
         }
 
         .section {
@@ -78,12 +95,23 @@
             font-size: 1.4rem;
         }
 
-        ul, ol {
-            margin-left: 2rem;
-            margin-bottom: 1.5rem;
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
         }
 
-        li {
+        .metric-card {
+            background: #f1f5f9;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            border: 1px solid #e2e8f0;
+        }
+
+        .metric-name {
+            font-weight: 600;
+            color: var(--primary-color);
             margin-bottom: 0.5rem;
         }
 
@@ -139,9 +167,95 @@
                 padding: 1.5rem;
             }
         }
+
+        .api-example {
+            background: #f8fafc;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            border: 1px solid #e2e8f0;
+        }
+
+        .endpoint {
+            color: var(--primary-color);
+            font-family: monospace;
+            font-weight: 500;
+        }
     </style>
 </head>
 <body>
+    <header>
+        <div class="header-content">
+            <h1>RAG Evaluation in Java</h1>
+            <p class="hero-text">A comprehensive tool for evaluating Retrieval-Augmented Generation (RAG) systems using Spring AI and VectorStore</p>
+            <a href="tools.html" class="cta-button">View API Tools</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <section class="section">
+            <h2>About the Project</h2>
+            <p>This project provides a robust framework for evaluating RAG systems, focusing on key metrics that measure both retrieval quality and generation accuracy. Built with Spring AI and VectorStore, it offers a complete suite of tools for document storage, retrieval, and evaluation.</p>
+        </section>
+
+        <section class="section">
+            <h2>Available Metrics</h2>
+            <div class="metrics-grid">
+                <div class="metric-card">
+                    <div class="metric-name">Precision ✅</div>
+                    <p>Measures how many retrieved documents are actually relevant</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">Recall ✅</div>
+                    <p>Measures how many relevant documents were retrieved out of all possible</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">F1 Score</div>
+                    <p>Balanced measure between precision and recall</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">MRR</div>
+                    <p>Mean Reciprocal Rank - measures position of first relevant document</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">nDCG</div>
+                    <p>Normalized Discounted Cumulative Gain - measures ranking quality</p>
+                </div>
+                <div class="metric-card">
+                    <div class="metric-name">Hit Rate</div>
+                    <p>Measures if relevant documents appear in top-k results</p>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Dataset Categories</h2>
+            <ul>
+                <li><strong>Appliances (20 docs)</strong> - Instructions for refrigerators, washing machines, dishwashers, etc.</li>
+                <li><strong>Gadgets (15 docs)</strong> - Mobile phones, laptops, smartwatches, and earbuds</li>
+                <li><strong>Troubleshooting (15 docs)</strong> - Error guides and solutions</li>
+                <li><strong>Cooking Recipes (15 docs)</strong> - Various cooking instructions</li>
+                <li><strong>Health & Wellness (10 docs)</strong> - Health tips and instructions</li>
+                <li><strong>Distractors (15 docs)</strong> - Random documents to test precision</li>
+            </ul>
+        </section>
+
+        <section class="section">
+            <h2>Quick Start</h2>
+            <div class="api-example">
+                <h3>Store a Document</h3>
+                <code class="endpoint">POST /storeDocument?documentText=your_text_here</code>
+            </div>
+            <div class="api-example">
+                <h3>Retrieve Similar Documents</h3>
+                <code class="endpoint">GET /getDocuments?documentText=your_query_here</code>
+            </div>
+            <div class="api-example">
+                <h3>Evaluate RAG Performance</h3>
+                <code class="endpoint">GET /evalRag?documentText=your_query_here</code>
+            </div>
+        </section>
+    </div>
     <header>
         <div class="header-content">
             <h1>Agentic RAG Patterns Implementation</h1>

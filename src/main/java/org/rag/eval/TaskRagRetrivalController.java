@@ -30,6 +30,7 @@ public class TaskRagRetrivalController {
 
         @PostMapping("/storeDocument")
         public String storeDocument(@RequestParam("documentText") String documentText)  {
+            documentText = documentText.substring(0,200); // trim to avoid overloading free mongo instance
             vectorService.storeData(documentText);
             GroundTruthData.GROUND_TRUTH_DOCS.add(documentText);
             return "Document stored successfully";
